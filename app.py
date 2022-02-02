@@ -15,7 +15,7 @@ data= pd.read_csv('https://raw.githubusercontent.com/EngrAhmadUmar/DataMining/ma
 # front end elements of the web page 
 html_temp = """ 
 <div style ="background-color:yellow;padding:13px"> 
-<h1 style ="color:black;text-align:center;">Streamlit Loan Prediction ML App</h1> 
+<h1 style ="color:black;text-align:center;">Streamlit New Article Clustering App</h1> 
 </div> 
 """ 
 st.markdown(html_temp, unsafe_allow_html = True) 
