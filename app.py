@@ -14,15 +14,15 @@ data= pd.read_csv('https://raw.githubusercontent.com/EngrAhmadUmar/DataMining/ma
       
 # front end elements of the web page 
 html_temp = """ 
-<div style ="background-color:yellow;padding:13px"> 
+<div style ="background-color:red;padding:13px"> 
 <h1 style ="color:black;text-align:center;">Streamlit New Article Clustering App</h1> 
 </div> 
 """ 
 st.markdown(html_temp, unsafe_allow_html = True) 
 default_value_goes_here = ""
-Content = st.text_area("label goes here", default_value_goes_here)
+Content = st.text_area("Please enter label in the text area below: ", default_value_goes_here)
 result =""
-data= pd.read_csv('https://raw.githubusercontent.com/Diane10/news_classifier/main/All_combined_New_papers%20-%20Sheet1.csv')
+data= pd.read_csv('https://raw.githubusercontent.com/EngrAhmadUmar/DataMining/main/news.csv')
 data["label"] = label_enc.fit_transform(data[["label"]])  
 # when 'Predict' is clicked, make the prediction and store it 
 if st.button("Predict"): 
