@@ -25,7 +25,7 @@ result =""
 data= pd.read_csv('https://raw.githubusercontent.com/EngrAhmadUmar/DataMining/main/news.csv')
 data["label"] = label_enc.fit_transform(data[["label"]])  
 # when 'Predict' is clicked, make the prediction and store it 
-if st.button("Cluster"): 
+if st.button("Display Link Cluster"): 
   pred = model.predict(tfid.transform([Content]))
   if pred==1:
     st.write('This article is about culture, celebreties or art.')   
