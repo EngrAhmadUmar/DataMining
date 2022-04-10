@@ -1,7 +1,7 @@
 # %%writefile app.py%
 import streamlit as st
 import pickle
-import gensim
+# import gensim
 import openpyxl
 import xlrd
 import numpy as np
