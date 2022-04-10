@@ -100,7 +100,7 @@ def main():
 #       featureshost = scaler.transform(dataframe)
 #       prediction = model.predict(featureshost)
 
-        result = print_recommended_songs(idx = 1, n = 20)
+        result = print_recommended_songs(idx = 305, n = 20)
         st.write(result)
 
 
