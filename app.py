@@ -30,26 +30,13 @@ def main():
     # display the front end aspect
     st.markdown(html_temp, unsafe_allow_html=True)
     default_value_goes_here = ""
-    # ball_control = st.number_input("Please enter the players Ball Control Attribute", 0, 100000000, 0)
-    # short_passing = st.number_input("Please enter the players Short Passing Attribute", 0, 100000000, 0)
-    # dribbling = st.number_input("Please enter the players Dribbling Attribute", 0, 100000000, 0)
-    # crossing = st.number_input("Please enter the players Crossing Attribute", 0, 100000000, 0)
-    # curve = st.number_input("Please enter the players Curve Attribute", 0, 100000000, 0)
-    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
-
+    uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
     global dataframe
     if uploaded_file:
-        df = pd.read_excel(uploaded_file)
-        playlist_test = df.values.tolist()
-    result = ""
+        limited_playlist = uploaded_file
+        
+    result = ""    
     
-    
-    
-    # attributes = [ball_control, short_passing, dribbling, crossing, curve]
-    #
-    result = ""
-    #
-    # # Display Books
     if st.button("Predict"):
         playlist_train, playlist_test = train_test_split(limited_playlist, test_size = 400,
                                                  shuffle = True, random_state = 123)
