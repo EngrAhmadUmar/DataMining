@@ -36,11 +36,12 @@ def main():
     # crossing = st.number_input("Please enter the players Crossing Attribute", 0, 100000000, 0)
     # curve = st.number_input("Please enter the players Curve Attribute", 0, 100000000, 0)
 
-    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
+    uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
 
     global dataframe
     if uploaded_file:
-        df = pd.read_excel(uploaded_file)
+#         df = pd.read_excel(uploaded_file)
+        df = uploaded_file.read()
         playlist_test = df
         # st.dataframe(df)
         # st.table(df)
