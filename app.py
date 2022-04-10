@@ -6,6 +6,8 @@ import openpyxl
 import xlrd
 import numpy as np
 import pandas as pd
+from gensim.models import Word2Vec
+from gensim.models.callbacks import CallbackAny2Vec
 from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 
