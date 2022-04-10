@@ -1,56 +1,105 @@
-import pickle
+# %%writefile app.py%
 import streamlit as st
-from sklearn.cluster import KMeans
+import pickle
+# import gensim
+import openpyxl
+import xlrd
+import numpy as np
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
-label_enc = LabelEncoder()
+from gensim.models import Word2Vec
+from gensim.models.callbacks import CallbackAny2Vec
+from sklearn.cluster import KMeans
+from gensim.models.doc2vec import Doc2Vec
+from sklearn.linear_model import LinearRegression
 
 
+# loading the trained model
+model = pickle.load(open('finalized_model.pkl','rb'))
 
-# clean_doc=pickle.load(open('clean_doc.obj','rb'))
-tfid= pickle.load(open('Tfidfmodels.pkl','rb'))
-model=pickle.load(open('kmeanmodel.pkl','rb'))
-data= pd.read_csv('https://raw.githubusercontent.com/EngrAhmadUmar/DataMining/main/news.csv')
-      
-# front end elements of the web page 
-html_temp = """ 
-<div style ="background-color:red;padding:13px"> 
-<h1 style ="color:black;text-align:center;">Streamlit New Article Clustering App</h1> 
-</div> 
-""" 
-st.markdown(html_temp, unsafe_allow_html = True) 
-default_value_goes_here = ""
-Content = st.text_area("Please enter label in the text area below: ", default_value_goes_here)
-result =""
-data= pd.read_csv('https://raw.githubusercontent.com/EngrAhmadUmar/DataMining/main/news.csv')
-data["label"] = label_enc.fit_transform(data[["label"]])  
-# when 'Predict' is clicked, make the prediction and store it 
-if st.button("Display Link Cluster"): 
-  pred = model.predict(tfid.transform([Content]))
-  if pred==1:
-    st.write('This article is about culture, celebreties or art.')   
-    pred= int(pred)
-    data_pred = data.loc[(data['label'] == pred)]
-    st.dataframe(data_pred['source_url'].unique())
-  elif pred==0:
-    st.write('Article is a business article')
-    term="business"
-    pred= int(pred)
-    data_pred = data.loc[(data['label'] == pred)]
-    # result_df= data_pred[data_pred['source_url'].str.contains(term)]
-    st.dataframe(data_pred['source_url'].unique())
-  elif pred==2:
-    st.write('Article is a political article') 
-    pred= int(pred)
-    term="pol"
-    pred= int(pred)
-    data_pred = data.loc[(data['label'] == pred)]
-    # result_df= data_pred[data_pred['source_url'].str.contains(term)]
-    st.dataframe(data_pred['source_url'].unique())
-  elif pred==3:
-    st.write('Article is a sport article')
-    pred= int(pred)
-    term='sport'
-    data_pred = data.loc[(data['label'] == pred)]
-    # result_df= data_pred[data_pred['source_url'].str.contains(term)]
-    st.dataframe(data_pred['source_url'].unique())
+
+def main():
+    # front end elements of the web page
+    html_temp = """ 
+    <div style ="background-color:#002E6D;padding:20px;font-weight:15px"> 
+    <h1 style ="color:white;text-align:center;">Music Recommender System</h1> 
+    </div> 
+    """
+
+    # display the front end aspect
+    st.markdown(html_temp, unsafe_allow_html=True)
+    default_value_goes_here = ""
+    # ball_control = st.number_input("Please enter the players Ball Control Attribute", 0, 100000000, 0)
+    # short_passing = st.number_input("Please enter the players Short Passing Attribute", 0, 100000000, 0)
+    # dribbling = st.number_input("Please enter the players Dribbling Attribute", 0, 100000000, 0)
+    # crossing = st.number_input("Please enter the players Crossing Attribute", 0, 100000000, 0)
+    # curve = st.number_input("Please enter the players Curve Attribute", 0, 100000000, 0)
+
+    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
+
+    global dataframe
+    if uploaded_file:
+        df = pd.read_excel(uploaded_file)
+        playlist_test = df
+        # st.dataframe(df)
+        # st.table(df)
+
+    # attributes = [ball_control, short_passing, dribbling, crossing, curve]
+    #
+    result = ""
+    #
+    # # Display Books
+    if st.button("Predict"):
+        def meanVectors(playlist):
+            vec = []
+            for song_id in playlist:
+                try:
+                    vec.append(model.wv[song_id])
+                except KeyError:
+                    continue
+            return np.mean(vec, axis=0)
+        def similarSongsByVector(vec, n = 10, by_name = True):
+            # extract most similar songs for the input vector
+            similar_songs = model.wv.similar_by_vector(vec, topn = n)
+
+            # extract name and similarity score of the similar products
+            if by_name:
+                similar_songs = [(songs.loc[int(song_id), "artist - title"], sim)
+                                      for song_id, sim in similar_songs]
+
+            return similar_songs
+        
+        playlist_vec = list(map(meanVectors, playlist_test))
+        def print_recommended_songs(idx, n):
+            print("============================")
+            print("SONGS PLAYLIST")
+            print("============================")
+            for song_id in playlist_test[idx]:
+                song_id = int(song_id)
+                print(songs.loc[song_id, "artist - title"])
+            print()
+            print("============================")
+            print(f"TOP {n} RECOMMENDED SONGS")
+            print("============================")
+            for song, sim in similarSongsByVector(playlist_vec[idx], n):
+                print(f"[Similarity: {sim:.3f}] {song}")
+            print("============================")
+            
+         
+#       arr = dataframe.columns
+
+#       for i in arr:
+#           notnull = dataframe[i][dataframe[i].notnull()]
+#           min = notnull.min()
+#           dataframe[i].replace(np.nan, min, inplace=True)
+
+#       scaler = StandardScaler()
+#       scaler.fit(dataframe)
+#       featureshost = scaler.transform(dataframe)
+#       prediction = model.predict(featureshost)
+
+        result = print_recommended_songs(idx = 305, n = 20)
+        st.write(result)
+
+
+if __name__ == '__main__':
+    main()
