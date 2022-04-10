@@ -9,11 +9,13 @@ import pandas as pd
 from gensim.models import Word2Vec
 from gensim.models.callbacks import CallbackAny2Vec
 from sklearn.cluster import KMeans
+from gensim.models.doc2vec import Doc2Vec
 from sklearn.linear_model import LinearRegression
 
 
 # loading the trained model
-model = pickle.load(open('finalized_model.pkl','rb'))
+model = Doc2Vec.load("finalized_model.pkl")
+# pickle.load(open('finalized_model.pkl','rb'))
 
 
 def main():
