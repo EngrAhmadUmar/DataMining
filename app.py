@@ -43,12 +43,17 @@ def main():
         playlist_test = df.values.tolist()
     result = ""
     
+    
+    
     # attributes = [ball_control, short_passing, dribbling, crossing, curve]
     #
     result = ""
     #
     # # Display Books
     if st.button("Predict"):
+        playlist_train, playlist_test = train_test_split(limited_playlist, test_size = 400,
+                                                 shuffle = True, random_state = 123)
+        
         def meanVectors(playlist):
             vec = []
             for song_id in playlist:
