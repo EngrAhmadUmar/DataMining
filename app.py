@@ -16,7 +16,7 @@ from sklearn.linear_model import LinearRegression
 
 # loading the trained model
 
-model = pickle.load(open('song2vec.model','rb'))
+model = pickle.load(open('recommender','rb'))
 
 
 def main():
