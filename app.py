@@ -14,8 +14,7 @@ from sklearn.linear_model import LinearRegression
 
 
 # loading the trained model
-model = Word2Vec.load("finalized_model.pkl")
-# pickle.load(open('finalized_model.pkl','rb'))
+model = pickle.load(open('finalized_model.pkl','rb'))
 
 
 def main():
