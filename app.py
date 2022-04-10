@@ -40,7 +40,7 @@ def main():
     global dataframe
     if uploaded_file:
         df = pd.read_excel(uploaded_file)
-        dataframe = df.values.tolist()
+        playlist_test = df.values.tolist()
     result = ""
     
     # attributes = [ball_control, short_passing, dribbling, crossing, curve]
