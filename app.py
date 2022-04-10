@@ -100,8 +100,8 @@ def main():
 #       featureshost = scaler.transform(dataframe)
 #       prediction = model.predict(featureshost)
 
-#         result = print_recommended_songs(idx = 305, n = 20)
-        st.write(len(playlist_test))
+        result = print_recommended_songs(idx = 1, n = 20)
+        st.write(result)
 
 
 if __name__ == '__main__':
