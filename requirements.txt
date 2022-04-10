@@ -5,4 +5,4 @@ tensorflow-cpu
 streamlit
 xlrd
 openpyxl
-gensim
+gensim==3.8.3
