@@ -14,7 +14,9 @@ from sklearn.linear_model import LinearRegression
 
 
 # loading the trained model
-model = pickle.load(open('finalized_model.pkl','rb'))
+
+model = Doc2Vec.load('song2vec.model')
+# pickle.load(open('song2vec.model','rb'))
 
 
 def main():
