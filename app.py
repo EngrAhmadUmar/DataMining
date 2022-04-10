@@ -41,8 +41,8 @@ def main():
     global dataframe
     if uploaded_file:
 #         df = pd.read_excel(uploaded_file)
-        df = uploaded_file.read()
-        playlist_test = df
+#         df = uploaded_file.read()
+        playlist_test = uploaded_file
         # st.dataframe(df)
         # st.table(df)
 
