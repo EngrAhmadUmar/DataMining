@@ -9,6 +9,7 @@ import pandas as pd
 from gensim.models import Word2Vec
 from gensim.models.callbacks import CallbackAny2Vec
 from sklearn.cluster import KMeans
+from sklearn.model_selection import train_test_split
 from gensim.models.doc2vec import Doc2Vec
 from sklearn.linear_model import LinearRegression
 
