@@ -35,17 +35,14 @@ def main():
     # dribbling = st.number_input("Please enter the players Dribbling Attribute", 0, 100000000, 0)
     # crossing = st.number_input("Please enter the players Crossing Attribute", 0, 100000000, 0)
     # curve = st.number_input("Please enter the players Curve Attribute", 0, 100000000, 0)
-
-    uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
+    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
 
     global dataframe
     if uploaded_file:
-#         df = pd.read_excel(uploaded_file)
-#         df = uploaded_file.read()
-        playlist_test = uploaded_file
-        # st.dataframe(df)
-        # st.table(df)
-
+        df = pd.read_excel(uploaded_file)
+        dataframe = df.values.tolist()
+    result = ""
+    
     # attributes = [ball_control, short_passing, dribbling, crossing, curve]
     #
     result = ""
