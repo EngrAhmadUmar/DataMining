@@ -1,5 +1,6 @@
 # %%writefile app.py%
 import streamlit as st
+import json
 import pickle
 # import gensim
 import openpyxl
@@ -10,7 +11,6 @@ from gensim.models import Word2Vec
 from gensim.models.callbacks import CallbackAny2Vec
 from sklearn.cluster import KMeans
 from sklearn.model_selection import train_test_split
-from gensim.models.doc2vec import Doc2Vec
 from sklearn.linear_model import LinearRegression
 
 
@@ -33,7 +33,9 @@ def main():
     uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
     global dataframe
     if uploaded_file:
-        limited_playlist = uploaded_file
+        with open(uploaded_file, 'r') as f:
+            limited_playlist = json.loads(f.read())
+#         limited_playlist = uploaded_file
         
     result = ""    
     
