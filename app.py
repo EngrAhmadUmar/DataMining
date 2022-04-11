@@ -38,6 +38,8 @@ def main():
     with open('limited_playlist.txt', 'r') as f:
         limited_playlist = json.loads(f.read())
         
+    songs = pd.read_csv('limited_songs.csv')
+        
     result = ""    
     
     if st.button("Predict"):
