@@ -33,10 +33,7 @@ def main():
     uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
     global dataframe
     if uploaded_file:
-        limited_playlist = json.load(uploaded_file)
-        jtopy=json.dumps(limited_playlist) #json.dumps take a dictionary as input and returns a string as output.
-        limited_playlist=json.loads(jtopy)
-#         limited_playlist = uploaded_file
+        limited_playlist = uploaded_file
         
     result = ""    
     
