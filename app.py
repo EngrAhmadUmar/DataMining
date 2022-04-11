@@ -71,7 +71,10 @@ def main():
             print("============================")
             for song_id in playlist_test[idx]:
                 song_id = int(song_id)
-                print(songs.loc[song_id])
+                try:
+                    print(songs.loc[song_id, "artist - title"])
+                except:
+                    pass
             print()
             print("============================")
             print(f"TOP {n} RECOMMENDED SONGS")
