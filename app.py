@@ -60,8 +60,11 @@ def main():
 
             # extract name and similarity score of the similar products
             if by_name:
-                similar_songs = [(songs.loc[int(song_id), "artist - title"], sim)
+                try:
+                    similar_songs = [(songs.loc[int(song_id), "artist - title"], sim)
                                       for song_id, sim in similar_songs]
+                except:
+                    pass
 
             return similar_songs
         
