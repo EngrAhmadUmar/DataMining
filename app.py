@@ -68,11 +68,10 @@ def main():
         playlist_vec = list(map(meanVectors, playlist_test))
         def print_recommended_songs(idx, n):
             print("============================")
-            print("SONGS PLAYLIST")
             print("============================")
             for song_id in playlist_test[idx]:
                 song_id = int(song_id)
-                print(songs.loc[song_id, "artist - title"])
+                print(songs.loc[song_id])
             print()
             print("============================")
             print(f"TOP {n} RECOMMENDED SONGS")
