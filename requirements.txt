@@ -1,7 +1,7 @@
 numpy>=1.9.2
 scikit-learn~=0.24.1
 pandas>=0.19
-tensorflow-cpu
+json
 streamlit
 xlrd
 openpyxl
