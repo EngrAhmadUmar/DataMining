@@ -30,10 +30,13 @@ def main():
     # display the front end aspect
     st.markdown(html_temp, unsafe_allow_html=True)
     default_value_goes_here = ""
-    uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
-    global dataframe
-    if uploaded_file:
-        limited_playlist = uploaded_file
+#     uploaded_file = st.file_uploader("Choose a CSV file", accept_multiple_files=True)
+#     global dataframe
+#     if uploaded_file:
+#         limited_playlist = uploaded_file
+
+    with open('limited_playlist.txt', 'r') as f:
+        limited_playlist = json.loads(f.read())
         
     result = ""    
     
